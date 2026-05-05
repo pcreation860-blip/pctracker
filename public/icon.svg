@@ -1,0 +1,32 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="512" height="512" rx="100" fill="#3B82F6"/>
+  
+  <!-- Printing Table Icon -->
+  <g transform="translate(96, 96)">
+    <!-- Table Top -->
+    <rect x="40" y="60" width="240" height="20" rx="4" fill="#FFFFFF"/>
+    
+    <!-- Table Legs -->
+    <rect x="50" y="80" width="16" height="120" rx="4" fill="#FFFFFF"/>
+    <rect x="254" y="80" width="16" height="120" rx="4" fill="#FFFFFF"/>
+    
+    <!-- Printing Rollers -->
+    <ellipse cx="160" cy="140" rx="80" ry="12" fill="#FCD34D"/>
+    <ellipse cx="160" cy="170" rx="80" ry="12" fill="#FCD34D"/>
+    
+    <!-- Document/Fabric -->
+    <rect x="100" y="100" width="120" height="80" rx="4" fill="#FFFFFF" opacity="0.7"/>
+    <line x1="110" y1="120" x2="210" y2="120" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="110" y1="140" x2="210" y2="140" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+    <line x1="110" y1="160" x2="180" y2="160" stroke="#3B82F6" stroke-width="3" stroke-linecap="round"/>
+    
+    <!-- Production indicator dots -->
+    <circle cx="280" cy="100" r="8" fill="#10B981"/>
+    <circle cx="280" cy="130" r="8" fill="#10B981"/>
+    <circle cx="280" cy="160" r="8" fill="#10B981"/>
+  </g>
+  
+  <!-- Letter "P" for Production -->
+  <text x="256" y="420" font-family="Arial, sans-serif" font-size="180" font-weight="bold" fill="#FFFFFF" text-anchor="middle">P</text>
+</svg>

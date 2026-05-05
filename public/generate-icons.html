@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Generate PWA Icons</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 50px auto;
+      padding: 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    button {
+      background: #3B82F6;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 20px;
+    }
+    button:hover {
+      background: #2563EB;
+    }
+    #preview {
+      margin-top: 20px;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .icon-preview {
+      text-align: center;
+    }
+    canvas {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>PWA Icon Generator</h1>
+    <p>Click the button below to generate and download icon files for your PWA app.</p>
+    <button onclick="generateIcons()">Generate and Download Icons</button>
+    <div id="preview"></div>
+  </div>
+
+  <script>
+    function generateIcon(size) {
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d');
+      
+      // Background with gradient
+      const gradient = ctx.createLinearGradient(0, 0, size, size);
+      gradient.addColorStop(0, '#3B82F6');
+      gradient.addColorStop(1, '#2563EB');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, size, size);
+      
+      // Large "P" for Production
+      ctx.fillStyle = '#FFFFFF';
+      ctx.font = `bold ${size * 0.5}px Arial, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('P', size / 2, size / 2);
+      
+      // Small "T" for Table/Tracker
+      ctx.font = `bold ${size * 0.2}px Arial, sans-serif`;
+      ctx.fillStyle = '#FCD34D';
+      ctx.fillText('T', size * 0.72, size * 0.28);
+      
+      return canvas;
+    }
+    
+    function generateIcons() {
+      const preview = document.getElementById('preview');
+      preview.innerHTML = '';
+      
+      const sizes = [192, 512];
+      
+      sizes.forEach(size => {
+        const canvas = generateIcon(size);
+        
+        // Show preview
+        const previewDiv = document.createElement('div');
+        previewDiv.className = 'icon-preview';
+        const previewCanvas = canvas.cloneNode();
+        const previewCtx = previewCanvas.getContext('2d');
+        previewCanvas.width = 150;
+        previewCanvas.height = 150;
+        previewCtx.drawImage(canvas, 0, 0, 150, 150);
+        previewDiv.appendChild(previewCanvas);
+        const label = document.createElement('p');
+        label.textContent = `${size}x${size}`;
+        previewDiv.appendChild(label);
+        preview.appendChild(previewDiv);
+        
+        // Download
+        canvas.toBlob((blob) => {
+          if (blob) {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `icon-${size}.png`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+          }
+        }, 'image/png');
+      });
+      
+      alert('Icons are being downloaded! Save them to the /public folder and refresh your app.');
+    }
+  </script>
+</body>
+</html>
